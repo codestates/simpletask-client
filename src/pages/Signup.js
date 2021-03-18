@@ -42,7 +42,7 @@ class Signup extends React.Component {
              <input  onChange= {this.handleInputValue("nickname")}></input>
           </div>
           <div>
-            <Link></Link>  
+            <Link to="/login">이미 아이디를 갖고 계신가요?</Link>  
           </div>
           <button>클릭</button>
 
