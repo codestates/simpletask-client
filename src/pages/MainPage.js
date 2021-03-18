@@ -23,7 +23,9 @@ class MainPage extends React.Component{
                         <span>
                             <Link to="/login"> Go to Login </Link>
                         </span>
-                        <span> Go to Signup </span>
+                        <span>
+                            <Link to="/signup"> Go to SignUp </Link>
+                        </span>
                     </div>
                 </header>
                 <main>
