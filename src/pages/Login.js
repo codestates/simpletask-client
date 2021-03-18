@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link, Route, BrowserRouter as Router} from "react-router-dom";
+
 import axios from 'axios';
 
 class Login extends React.Component{
@@ -27,8 +29,12 @@ class Login extends React.Component{
                             <input type="password"></input>
                         </div>
                         <div>
+                            <Link to="/signup">아이디가 없으신가요?</Link>
+                        </div>
+                        <div>
                             <button>LogIn</button>
                         </div>
+                        
                         <div className="alert-error"></div>
                     </form>
                 </center>
