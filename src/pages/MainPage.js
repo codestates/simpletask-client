@@ -6,10 +6,9 @@ class MainPage extends React.Component{
     constructor(props){
         super(props)
 
-        this.state = {
-            isLogin: false,
-            userData: null
-        }
+        console.log('here')
+        console.log(props)
+
     }
 
     render(){
@@ -25,6 +24,12 @@ class MainPage extends React.Component{
                         </span>
                         <span>
                             <Link to="/signup"> Go to SignUp </Link>
+                        </span>
+                        <span>
+                            Go to Logout
+                        </span>
+                        <span>
+                            <Link to="/mypage"> Go to Mypage </Link>
                         </span>
                     </div>
                 </header>
