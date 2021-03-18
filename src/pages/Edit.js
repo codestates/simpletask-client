@@ -41,12 +41,13 @@ class Edit extends React.Component{
        {password:Password,Edit:EditPassword},{withCredentials :true})
         .then((data)=>{
             
-            if(!data){
+            if(data.message ==="fail"){
                this.setState({
                    err: "뭔가이상"
                })
             }
            // 맞으면 마이페이지로 이동
+           //어찌 이동해야될까
         })
     }
 
