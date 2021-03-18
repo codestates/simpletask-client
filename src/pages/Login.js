@@ -36,8 +36,11 @@ class Login extends React.Component{
            })
        }
 
-      return axios.post("url",{email:email, password:password},{withCredentials :true})
+      return axios.post("https://simpletask.ga/user/login",
+      {email:email, password:password},{withCredentials :true})
        .then(()=>{
+           
+           this.props.loginHandler()
            //제대로 전달됫으면 어찌 받을까요
        })
 
