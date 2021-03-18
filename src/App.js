@@ -1,25 +1,55 @@
 import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import {Link, Route, BrowserRouter as Router, Switch} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import MainPage from "./pages/MainPage"
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
+import Mypage from "./pages/Mypage"
+import Edit from "./pages/Edit"
+
+class App extends React.Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      isLogin: false,
+      userData: null
+    }
+
+    this.loginHandler = this.loginHandler.bind(this);
+    this.logoutHandler = this.logoutHandler.bind(this);
+  }
+
+  loginHandler(){
+    this.setState({
+      isLogin: true
+    })
+  }
+
+  logoutHandler(){
+    this.setState({
+      isLogin: false
+    })
+  }
+
+  render(){
+    return (
+      <Router>
+        <main>
+          <Switch>
+            <Route exact path="/" render={() => <MainPage></MainPage>}></Route>
+            <Route exact path="/login" render={() => <Login></Login>}></Route>
+            <Route exact path="/signup" render={() => <Signup></Signup>}></Route>
+            <Route exact path="/mypage" render={() => <Mypage></Mypage>}></Route>
+            <Route exact path="/editpassword" render={() => <Edit></Edit>}></Route>
+          </Switch>
+        </main>
+      </Router> 
+    );
+  }
+  
 }
 
 export default App;
