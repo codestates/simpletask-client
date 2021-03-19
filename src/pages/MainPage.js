@@ -6,9 +6,6 @@ class MainPage extends React.Component{
     constructor(props){
         super(props)
 
-        console.log('here')
-        console.log(props)
-
     }
 
     handleLogout(){
@@ -24,20 +21,26 @@ class MainPage extends React.Component{
                     <center>
                         <h1>MainPage</h1>
                     </center>
-                    <div>
-                        <span>
+                    {!this.userData ? (
+                        <div>
+                            <span>
                             <Link to="/login"> Go to Login </Link>
-                        </span>
-                        <span>
-                            <Link to="/signup"> Go to SignUp </Link>
-                        </span>
-                        <span>
-                            Go to Logout
-                        </span>
-                        <span>
-                            <Link to="/mypage"> Go to Mypage </Link>
-                        </span>
-                    </div>
+                            </span>
+                            <span>
+                                <Link to="/signup"> Go to SignUp </Link>
+                            </span>
+                        </div>
+                    ) : (
+                        <div>
+                            <span>
+                                <button onClick={this.handleLogout}> Go to Logout </button>
+                            </span>
+                            <span>
+                                <Link to="/mypage"> Go to Mypage </Link>
+                            </span>
+                        </div>
+                    )}
+                 
                 </header>
                 <main>
                     <center>
