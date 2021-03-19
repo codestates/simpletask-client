@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React from "react";
-import {Link, Route, BrowserRouter as Router, Switch} from "react-router-dom";
+import {Link, Route, withRouter, BrowserRouter as Router, Switch} from "react-router-dom";
 import MainPage from "./pages/MainPage"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
@@ -61,4 +61,4 @@ class App extends React.Component{
     );
   }
 }
-export default App;
+export default withRouter(App);

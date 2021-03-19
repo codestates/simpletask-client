@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, Route, BrowserRouter as Router} from "react-router-dom";
+import {Link, Route, withRouter, BrowserRouter as Router} from "react-router-dom";
 import axios from 'axios';
 class Login extends React.Component{
     constructor(props){
@@ -16,8 +16,7 @@ class Login extends React.Component{
         this.setState({ [key]: e.target.value });
       };
     clickLoginhandle(){
-       const {email,password} = this.state
-       if(!email || !password) {
+       if(!this.state.email || !this.state.password) {
           this.setState({
               err : "모든 항목 작성해주세요?"
           })
@@ -28,16 +27,18 @@ class Login extends React.Component{
                err : ""
            })
        }
-      return axios.post("https://simpletask.ga/user/login",
-      {email:email, password:password},{withCredentials :true})
+       console.log("@222222222222222");
+       console.log(this.state.email,this.state.password , "33333333333");
+      return axios.post("http://localhost:80/signin",
+      {email:this.state.email, password:this.state.password})
       .then((res)=>{
-          if(res.data.message !== "ok"){
-             return this.setState({
-                  err: "다시 입력해 주세요?"
-              }) 
-          }
+          console.log(res)
           this.props.loginHandler()
           // 페이지 이동시켜야됨
+      })
+      .catch(err=>{
+         console.log(this.state.err);
+          console.log(err);
       })
     }
     render(){
@@ -45,7 +46,7 @@ class Login extends React.Component{
             <div>
                 <center>
                     <h1>LogIn Page</h1>
-                    <form>
+                    <form onSubmit = {(e)=>{e.preventDefault(); console.log("Sdaad") }}>
                         <div>
                             <span>Email </span>
                             <input type="email" onChange = {this.handleInputValue("email")}></input>
@@ -67,4 +68,4 @@ class Login extends React.Component{
         )
     }
 }
-export default Login
+export default withRouter(Login);
