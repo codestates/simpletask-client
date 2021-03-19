@@ -58,7 +58,7 @@ class Signup extends React.Component {
           <div>
             <Link to="/login">이미 아이디를 갖고 계신가요?</Link>  
           </div>
-          <button>클릭</button>
+          <button onClick={this.handleSignup} className="signupBtn">클릭</button>
 
           <div>{this.state.err}</div>
 
