@@ -9,7 +9,7 @@ class MainPage extends React.Component{
     }
 
     handleLogout(){
-        axios.post("https://localhost:3000/logout", null, {withCredentials: true})
+        axios.post("https://localhost:4000/user/logout", null, {withCredentials: true})
         .then(() => this.props.logoutHandler())
         .catch((err) => alert(err))
     }
