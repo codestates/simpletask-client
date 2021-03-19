@@ -13,22 +13,22 @@ class App extends React.Component{
     super(props)
     this.state = {
       isLogin: false,
-      userData: null,
+      userInfo: null,
       text : null
     }
     this.loginHandler = this.loginHandler.bind(this);
     this.logoutHandler = this.logoutHandler.bind(this);
   }
   loginHandler(){
-    return axios.get("https://simpletask.ga/user/mypage",{withCredentials :true})
+    return axios.get("https://localhost:4000/user/mypage",{withCredentials :true})
     .then((res)=>{
       this.setState({
-        isLogin:true,
-        userdata: res.data
+        isLogin: false,
+        userInfo: res.data
       })
     })
     .then(()=>{
-      axios.get("https://simpletask.ga/",{withCredentials: true})
+      axios.get("https://localhost:4000/",{withCredentials: true})
     })
     .then((tex)=>{
       this.setState({
@@ -37,8 +37,12 @@ class App extends React.Component{
     })
   }
   logoutHandler(){
-    this.setState({
-      isLogin: false
+    axios.post("https://localhost:4000/signout")
+    .then((res) =>{
+      this.setState({
+        isLogin: false,
+        userInfo: null
+      })
     })
   }
   render(){
