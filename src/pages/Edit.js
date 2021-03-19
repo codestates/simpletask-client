@@ -1,5 +1,7 @@
 import axios from "axios";
 import React from "react";
+import {Link, Route, withRouter, BrowserRouter as Router} from "react-router-dom";
+
 class Edit extends React.Component{
     constructor(props){
         super(props)
@@ -29,10 +31,11 @@ class Edit extends React.Component{
            })
        }
 //
-       return axios.post("https://simpletask.ga/user/editpassword",
+       return axios.post("http://localhost:4000/editpw",
        {password:Password,Edit:EditPassword},{withCredentials :true})
         .then((res)=>{
             if(res.data.message !=="ok"){
+              console.log("실패시")
                return this.setState({
                    err: "뭔가이상"
                })
@@ -59,4 +62,4 @@ class Edit extends React.Component{
        )
    }
 }
-export default Edit
+export default withRouter(Edit);

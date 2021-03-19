@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, Route, BrowserRouter as Router} from "react-router-dom";
+import {Link, Route, withRouter, BrowserRouter as Router} from "react-router-dom";
 import axios from "axios";
 
 class MainPage extends React.Component{
@@ -53,4 +53,4 @@ class MainPage extends React.Component{
     }
 }
 
-export default MainPage
+export default withRouter(MainPage);
