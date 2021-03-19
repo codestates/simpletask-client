@@ -6,10 +6,13 @@ class MainPage extends React.Component{
     constructor(props){
         super(props)
 
+        console.log('here')
+        console.log(props)
+
     }
 
     handleLogout(){
-        axios.post("https://localhost:3000/logout", null, {'Content-Type':'application/json',withCredentials: true})
+        axios.post("https://localhost:3000/logout", null, {withCredentials: true})
         .then(() => this.props.logoutHandler())
         .catch((err) => alert(err))
     }
@@ -21,25 +24,20 @@ class MainPage extends React.Component{
                     <center>
                         <h1>MainPage</h1>
                     </center>
-                    {!this.props.userData ? (
-                        <div>
-                            <span>
+                    <div>
+                        <span>
                             <Link to="/login"> Go to Login </Link>
-                            </span>
-                            <span>
-                                <Link to="/signup"> Go to SignUp </Link>
-                            </span>
-                        </div>
-                    ) : (
-                        <div>
-                            <span>
-                                Go to Logout
-                            </span>
-                            <span>
-                                <Link to="/mypage"> Go to Mypage </Link>
-                            </span>
-                        </div>
-                    )}
+                        </span>
+                        <span>
+                            <Link to="/signup"> Go to SignUp </Link>
+                        </span>
+                        <span>
+                            Go to Logout
+                        </span>
+                        <span>
+                            <Link to="/mypage"> Go to Mypage </Link>
+                        </span>
+                    </div>
                 </header>
                 <main>
                     <center>
