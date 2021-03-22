@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, Route, withRouter, BrowserRouter as Router} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import axios from 'axios';
 class Login extends React.Component{
     constructor(props){
@@ -11,11 +11,17 @@ class Login extends React.Component{
         }
         this.handleInputValue = this.handleInputValue.bind(this)
         this.clickLoginhandle = this.clickLoginhandle.bind(this)
+        this.nomemberLogin = this.nomemberLogin.bind(this);
     }
+    //input에 넣는값으로 state 변환시키기
     handleInputValue = (key) => (e) => {
         this.setState({ [key]: e.target.value });
+    
       };
+
+// 로그인 요청을 보내면 유저정보 요청하기
     clickLoginhandle(){
+       
        if(!this.state.email || !this.state.password) {
           this.setState({
               err : "모든 항목 작성해주세요?"
@@ -27,26 +33,39 @@ class Login extends React.Component{
                err : ""
            })
        }
-       console.log("@222222222222222");
-       console.log(this.state.email,this.state.password , "33333333333");
-      return axios.post("http://localhost:80/signin",
+
+    
+       axios.post("http://localhost:8080/signin",
       {email:this.state.email, password:this.state.password})
+      .then(()=>{
+          console.log("@@@@로그인보냄@@@@@@@")
+          console.log(this.state.email)
+          return axios.post("http://localhost:8080/user",{email:this.state.email})
+      })
       .then((res)=>{
-          console.log(res)
-          this.props.loginHandler()
-          // 페이지 이동시켜야됨
+          console.log(res.data.data,"@@@@@@정보가져오기@@@@@@@")
+          this.props.loginHandler(res.data.data)
+        
+          this.props.history.push('/')
+         
       })
       .catch(err=>{
-         console.log(this.state.err);
+         
           console.log(err);
       })
     }
+ 
+    nomemberLogin(){
+        this.props.nomemberLoginHandler();
+        this.props.history.push('/');
+    }
+
     render(){
         return(
             <div>
                 <center>
                     <h1>LogIn Page</h1>
-                    <form onSubmit = {(e)=>{e.preventDefault(); console.log("Sdaad") }}>
+                    <form onSubmit = {(e)=>{e.preventDefault()}}>
                         <div>
                             <span>Email </span>
                             <input type="email" onChange = {this.handleInputValue("email")}></input>
@@ -61,6 +80,9 @@ class Login extends React.Component{
                         <div>
                             <button onClick={this.clickLoginhandle}>LogIn</button>
                         </div>
+                        <div>
+                            <button onClick={this.nomemberLogin}>비회원 로그인</button>
+                        </div>
                          {this.state.err ? <div  className="alert-box" >{this.state.err}</div> : ""} 
                     </form>
                 </center>
@@ -68,4 +90,4 @@ class Login extends React.Component{
         )
     }
 }
-export default withRouter(Login);
+export default withRouter(Login)

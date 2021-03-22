@@ -1,7 +1,6 @@
 import axios from "axios";
 import React from "react";
-import {Link, Route, withRouter, BrowserRouter as Router} from "react-router-dom";
-
+import {Link, withRouter} from "react-router-dom";
 class Edit extends React.Component{
     constructor(props){
         super(props)
@@ -18,6 +17,7 @@ class Edit extends React.Component{
       };
     ClickEdithandle() {
         // axios.post(`https://localhost:4000/`,{데이터?},{옵션})
+     const {userData} = this.props
      const {Password,EditPassword} = this.state
        if(!Password || !EditPassword){
            this.setState({
@@ -30,18 +30,15 @@ class Edit extends React.Component{
                err:""
            })
        }
-//
-       return axios.post("http://localhost:4000/editpw",
-       {password:Password,Edit:EditPassword},{withCredentials :true})
+        console.log(userData,"실행되냐");
+       return axios.post("http://localhost:8080/editpw",
+       {email:userData.email, password:EditPassword})
         .then((res)=>{
-            if(res.data.message !=="ok"){
-              console.log("실패시")
-               return this.setState({
-                   err: "뭔가이상"
-               })
-            }
-           // 맞으면 마이페이지로 이동
-           //어찌 이동해야될까
+            console.log(res,"@@변경됨@@@@");
+            this.props.history.push('/mypage')
+        })
+        .catch((err)=>{
+        console.log(err);
         })
     }
    render(){
@@ -53,13 +50,18 @@ class Edit extends React.Component{
                    비밀번호 <input type="password" onChange = {this.handleInputValue("Password")}></input>
                </div>
                <div>
-                바꿀 비밀번호 <input type="password" onChange = {this.handleInputValue("EditPassword")}></input>
+                   바꿀 비밀번호 <input type="password" onChange = {this.handleInputValue("EditPassword")}></input>
                </div>
-               <button onClick = {this.ClickEdithandle}>클릭</button>
+               <span>
+                 <button onClick = {this.ClickEdithandle}>변경</button>
+               </span>
+               <span>
+                 <button onClick = {()=>{this.props.history.push('/mypage')}}>취소</button>
+               </span>
                {this.state.err ? <div  className="alert-box">{this.state.err}</div> : ""}
                </center>
            </div>
        )
    }
 }
-export default withRouter(Edit);
+export default withRouter(Edit)
