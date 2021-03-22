@@ -5,7 +5,7 @@ import { Switch, Route, Redirect, withRouter, useHistory } from "react-router-do
 
 import TextEntry from "./textEntry"
 // user_id:
-function MainPage({texts, isLogin, userData, logoutHandler}) {
+function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete}) {
     
     // let history = useHistory()
 
@@ -30,22 +30,35 @@ function MainPage({texts, isLogin, userData, logoutHandler}) {
     console.log(isLogin);
     console.log(userData);
     console.log(texts);
+    
     let renderText = (obj) =>{
         let content = document.createElement('div');
         let title = document.createElement('div');
         let text = document.createElement('div');
         let date = document.createElement('div');
+        let buttons = document.createElement('div');
+        let editBtn = document.createElement('button');
+        let deleteBtn = document.createElement('button');
         
         content.classList.add('contents')
         title.classList.add('title');
         text.classList.add('text');
         date.classList.add('date');
+        editBtn.classList.add('editContent');
+        deleteBtn.classList.add('deleteContent');
 
         title.textContent = obj.title;
         text.textContent = obj.text;
         date.textContent = obj.createdAt;
+        editBtn.textContent = "수정";
+        editBtn.id = obj.user_id;
+        deleteBtn.textContent = "삭제";
+        deleteBtn.id = obj.user_id;
 
-        content.append(title,text,date);
+        deleteBtn.addEventListener('click', deleteTextHandler)
+
+        buttons.append(editBtn, deleteBtn)
+        content.append(title, text, date, buttons);
         //console.log(content);
         return content;
     }
@@ -91,6 +104,19 @@ function MainPage({texts, isLogin, userData, logoutHandler}) {
         console.log('reset contents');
         removeContent();
         renderContent();
+    }
+
+    let deleteTextHandler = (event) =>{
+        let targetName = event.target.id
+        console.log(targetName);
+        if(targetName === userData.email){
+            console.log('ok')
+            HandleTextDelete();
+        }else{
+            console.log('no');
+        }
+
+
     }
 
 
@@ -144,7 +170,7 @@ function MainPage({texts, isLogin, userData, logoutHandler}) {
                     <div className="contents_outside">
                         <div className="contents_inside">
                             {texts.map(text =>
-                                <TextEntry texts={text} key = {text.user_id}/>
+                                <TextEntry texts={text} key = {text.id}/>
                                 )}
                         </div>
                     </div>
@@ -156,7 +182,8 @@ function MainPage({texts, isLogin, userData, logoutHandler}) {
                         <div>
                         <button onClick={() => reset()}> 전체글 </button> 
                         <button onClick={() => filtering()}> 내가작성한글만 </button>
-                        <button> 글쓰기  </button>
+                        <button > 글쓰기  </button>
+                        <Link to="/writeform"> 글 쓰기</Link>
                     </div>
                     ) : (
                         ''
