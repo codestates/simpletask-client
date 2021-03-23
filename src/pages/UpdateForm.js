@@ -47,7 +47,7 @@ class UpdateForm extends React.Component{
                     </div>
                     <div>
                         <Link to="/">이전으로</Link>
-                        <button to="/">이전으로</button>
+                        <button onClick={() => this.props.history.push('/')}>이전으로</button>
                         <button onClick={this.updateText}>수정하기</button>
                     </div>
                 </main>

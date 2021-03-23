@@ -87,4 +87,4 @@ class Signup extends React.Component {
 
 }
 
-export default Signup
+export default withRouter(Signup)
