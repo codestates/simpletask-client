@@ -1,10 +1,11 @@
 import React from "react"
-import {Link,withRouter} from "react-router-dom";
+import {Link,withRouter,useHistory} from "react-router-dom";
 import axios from 'axios';
 //props는 userdata 
 function  Mypage ({userData,deleteHand}) {
 //    '/deleteid' 아이디삭제
-  
+
+let history = useHistory()
    return ( 
     <div>
       <center>
@@ -32,6 +33,7 @@ function  Mypage ({userData,deleteHand}) {
                   : ''
           }
         </span>
+       <span>
        <span>
        </span>
 

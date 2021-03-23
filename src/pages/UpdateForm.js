@@ -46,7 +46,7 @@ class UpdateForm extends React.Component{
                         <textarea id="textform" onChange={this.handleInputValue("text")}></textarea>
                     </div>
                     <div>
-                        <Link to="/">이전으로</Link>
+                      
                         <button onClick={() => this.props.history.push('/')}>이전으로</button>
                         <button onClick={this.updateText}>수정하기</button>
                     </div>
