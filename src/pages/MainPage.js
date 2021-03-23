@@ -15,9 +15,9 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
 
     //지금 디드 마운팅 보다 map 이 먼저 읽어가지고 나오지가 않음
 
-    console.log(isLogin);
-    console.log(userData);
-    console.log(texts);
+    // console.log(isLogin);
+    // console.log(userData);
+    // console.log(texts);
     
     let renderText = (obj) =>{
         let content = document.createElement('div');

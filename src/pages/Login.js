@@ -43,6 +43,7 @@ class Login extends React.Component{
             return axios.post("http://localhost:8080/user",{email:this.state.email})
         })
         .then((res)=>{
+            console.log(res.data)
             console.log(res.data.data,"@@@@@@정보가져오기@@@@@@@")
             this.props.loginHandler(res.data.data)
         
@@ -58,6 +59,11 @@ class Login extends React.Component{
     nomemberLogin(){
         this.props.nomemberLoginHandler();
         this.props.history.push('/');
+    }
+    
+    gitOauth() {
+        window.location.assign('https://github.com/login/oauth/authorize?client_id=77ea45a221e7f8a02f07')
+        // git login 클릭시 인증 페이지로 리디렉션
     }
 
     render(){
@@ -82,6 +88,11 @@ class Login extends React.Component{
                         </div>
                         <div>
                             <button onClick={this.nomemberLogin}>비회원 로그인</button>
+                        </div>
+                        <div>
+                            <button onClick={() => this.gitOauth()}>
+                                git 로그인
+                            </button> 
                         </div>
                          {this.state.err ? <div  className="alert-box" >{this.state.err}</div> : ""} 
                     </form>

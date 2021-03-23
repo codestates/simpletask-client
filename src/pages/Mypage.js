@@ -4,6 +4,7 @@ import axios from 'axios';
 //props는 userdata 
 function  Mypage ({userData,deleteHand}) {
 //    '/deleteid' 아이디삭제
+  
    return ( 
     <div>
       <center>
@@ -17,15 +18,23 @@ function  Mypage ({userData,deleteHand}) {
        <div>
          닉네임 : {userData.nickname}
         </div>
+
         {userData.friend ? <div>관심있는 사람 : {userData.friend}</div> : ''}
         <div>생성일 : {userData.createdAt}</div>
+        <Link to="/" > 메인페이지 </Link>
+
         <span>
-        <Link to="/editpassword"> 비밀번호 변경 </Link>
+          {userData.isGit === false ?
+          <div>
+                  <button to="/editpassword"> 비밀번호 변경 </button>
+                  <button onClick={deleteHand}>회원 탈퇴</button>
+                  </div>
+                  : ''
+          }
         </span>
        <span>
-        <Link to="/" > 메인페이지 </Link>
        </span>
-       <button onClick={deleteHand}>회원 탈퇴</button>
+
      </center>
     </div>
    ) 
