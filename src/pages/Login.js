@@ -35,12 +35,12 @@ class Login extends React.Component{
        }
 
     
-        axios.post("http://localhost:8080/signin",
+        axios.post("http://localhost:8000/signin",
             {email:this.state.email, password:this.state.password})
         .then(()=>{
             console.log("@@@@로그인보냄@@@@@@@")
             console.log(this.state.email)
-            return axios.post("http://localhost:8080/user",{email:this.state.email})
+            return axios.post("http://localhost:8000/user",{email:this.state.email})
         })
         .then((res)=>{
             console.log(res.data.data,"@@@@@@정보가져오기@@@@@@@")
@@ -62,7 +62,7 @@ class Login extends React.Component{
 
     render(){
         return(
-            <div>
+            <div id="login">
                 <center>
                     <h1>LogIn Page</h1>
                     <form onSubmit = {(e)=>{e.preventDefault()}}>
@@ -78,10 +78,10 @@ class Login extends React.Component{
                             <Link to="/signup">아이디가 없으신가요?</Link>
                         </div>
                         <div>
-                            <button onClick={this.clickLoginhandle}>LogIn</button>
+                            <button className="login-button" onClick={this.clickLoginhandle}>LogIn</button>
                         </div>
                         <div>
-                            <button onClick={this.nomemberLogin}>비회원 로그인</button>
+                            <button className="login-button" onClick={this.nomemberLogin}>비회원 로그인</button>
                         </div>
                          {this.state.err ? <div  className="alert-box" >{this.state.err}</div> : ""} 
                     </form>

@@ -42,6 +42,9 @@
 #mainview {
 display: flex;
 }
+#login{
+  background-color: black;
+}
 
 #loginContainer {
   /* display: flex;
