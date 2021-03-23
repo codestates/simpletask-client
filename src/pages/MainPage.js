@@ -6,8 +6,6 @@ import { Switch, Route, Redirect, withRouter, useHistory } from "react-router-do
 import TextEntry from "./textEntry"
 import UpdateForm from "./UpdateForm";
 
-// 수정중
-
 // user_id:
 function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, HandleTextIdThrow}) {
     
@@ -21,8 +19,6 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
     
     let renderText = (obj) =>{
         let content = document.createElement('div');
-        let id = document.createElement('div');
-        let name = document.createElement('div')
         let title = document.createElement('div');
         let text = document.createElement('div');
         let date = document.createElement('div');
@@ -31,19 +27,15 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
         let deleteBtn = document.createElement('button');
         
         content.classList.add('contents')
-        id.classList.add('id')
-        name.classList.add('name')
         title.classList.add('title');
         text.classList.add('text');
         date.classList.add('date');
         editBtn.classList.add('editContent');
         deleteBtn.classList.add('deleteContent');
 
-        id.textContent = `글 번호 : ${obj.id}`
-        name.textContent = `작성자 : ${obj.user_id}`
-        title.textContent = `제목 : ${obj.title}`;
-        text.textContent = `내용 : ${obj.text}`;
-        date.textContent = `작성일 : ${obj.createdAt}`;
+        title.textContent = obj.title;
+        text.textContent = obj.text;
+        date.textContent = obj.createdAt;
         editBtn.textContent = "수정";
         editBtn.id = obj.id;
         editBtn.value = obj.user_id
@@ -55,7 +47,7 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
         deleteBtn.addEventListener('click', deleteTextHandler);
 
         buttons.append(editBtn, deleteBtn)
-        content.append(id, name, title, text, date, buttons);
+        content.append(title, text, date, buttons);
         //console.log(content);
         return content;
     }
@@ -123,16 +115,10 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
         if(targetName.value === userData.email){
             console.log('ok')
             HandleTextDelete(targetName.id);
-            history.push('/bye')
-            history.push('/')
         }else{
             console.log('no');
         }
 
-    }
-
-    function mainClick() {
-        history.push("/signin");
     }
 
 
