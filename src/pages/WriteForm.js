@@ -61,8 +61,7 @@ class WriteForm extends React.Component{
                         <textarea id="textform" onChange={this.handleInputValue("text")}></textarea>
                     </div>
                     <div>
-                        <Link to="/">이전으로</Link>
-                        <button>이전으로</button>
+                        <button onClick={() => this.props.history.push('/')}>이전으로</button>
                         <button onClick={this.createWrite}>작성하기</button>
                     </div>
                 </main>

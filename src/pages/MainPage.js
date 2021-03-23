@@ -10,6 +10,7 @@ import UpdateForm from "./UpdateForm";
 function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, HandleTextIdThrow}) {
     
     let history = useHistory()
+    
 
     //지금 디드 마운팅 보다 map 이 먼저 읽어가지고 나오지가 않음
 
@@ -158,8 +159,8 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
                      </span>
                      {userData ? (
                          <span>
-                            <button>
-                            <Link to="/mypage">내 정보?</Link>
+                            <button onClick={()=>{history.push("/mypage")}}>
+                            내 정보
                             </button>
                         </span>
                      ) : (
@@ -185,7 +186,7 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
                         <button onClick={() => reset()}> 전체글 </button> 
                         <button onClick={() => filtering()}> 내가작성한글만 </button>
                         <button onClick={() => history.push("/writeform")}> 글쓰기  </button>
-                        <Link to="/writeform"> 글 쓰기</Link>
+                       
                     </div>
                     ) : (
                         ''

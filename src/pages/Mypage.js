@@ -1,9 +1,11 @@
 import React from "react"
-import {Link,withRouter} from "react-router-dom";
+import {Link,withRouter,useHistory} from "react-router-dom";
 import axios from 'axios';
 //props는 userdata 
 function  Mypage ({userData,deleteHand}) {
 //    '/deleteid' 아이디삭제
+let history = useHistory()
+
    return ( 
     <div>
       <center>
@@ -19,11 +21,11 @@ function  Mypage ({userData,deleteHand}) {
         </div>
         {userData.friend ? <div>관심있는 사람 : {userData.friend}</div> : ''}
         <div>생성일 : {userData.createdAt}</div>
-        <span>
-        <Link to="/editpassword"> 비밀번호 변경 </Link>
+        <span>      
+          <button onClick={()=>{history.push('editpassword') }}>비밀번호 변경</button>
         </span>
        <span>
-        <Link to="/" > 메인페이지 </Link>
+         <button onClick={()=>{history.push("/")}}>메인페이지</button>
        </span>
        <button onClick={deleteHand}>회원 탈퇴</button>
      </center>

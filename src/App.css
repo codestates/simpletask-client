@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+
+  
 }
 
 .App-logo {
@@ -35,4 +37,67 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#mainview {
+display: flex;
+}
+#login{
+  background-color: black;
+}
+
+#loginContainer {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60vh;
+  width: 40vh;
+  background-color: #2a9d8f;
+  padding: 20px;
+  border-radius: 10px;
+  opacity: 0.8;
+  font-weight: 900; */
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(30, 230, 163);
+  border-radius: 10px;
+  padding-bottom: 50px;
+  min-height: 185px;
+  height: 250px;
+  width: 500px;
+  margin: 50px auto;
+  text-align: center;
+  display: inline-block;
+}
+
+.login-button {
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  background-color: #61dafb;
+  color: white;
+  border-radius: 10px;
+  font-weight: bolder;
+  margin: 50px auto;
+}
+
+#MainContainer1 {
+  /* display: flex; */
+  margin: auto;
+  height: 100%;
+  background-color: #b2ff59;
+  width: 800px;
+  border-radius: 10px;
+}
+
+
+.main-button {
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  background-color: #61dafb;
+  color: white;
+  border-radius: 10px;
+  font-weight: bolder;
+  margin: 50px auto;
 }
