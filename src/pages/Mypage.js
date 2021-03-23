@@ -17,6 +17,8 @@ function  Mypage ({userData,deleteHand}) {
        <div>
          닉네임 : {userData.nickname}
         </div>
+        {userData.friend ? <div>관심있는 사람 : {userData.friend}</div> : ''}
+        <div>생성일 : {userData.createdAt}</div>
         <span>
         <Link to="/editpassword"> 비밀번호 변경 </Link>
         </span>

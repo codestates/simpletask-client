@@ -9,6 +9,7 @@ import Edit from "./pages/Edit"
 import axios from "axios";
 import WriteForm from "./pages/WriteForm";
 import UpdateForm from "./pages/UpdateForm";
+import Bye from "./pages/Bye"
 
 // import axios from 'axios';
 class App extends React.Component{
@@ -73,17 +74,18 @@ class App extends React.Component{
   }
   //회원탈퇴
   deleteHand(){
+    this.props.history.push('/bye')
     console.log("@@@@@@@@삭제@@@@@@@");
     console.log(this.state.userData);
     console.log(this.state.userData.id);
-   axios.post("http://localhost:8080/deleteid",{id:this.state.userData.id})
+   axios.post("http://localhost:8080/deleteid",{email:this.state.userData.email})
    .then(()=>{
      console.log("@@@@@@삭제됨@@@@@@@");
      this.setState({
       isLogin: false,
       userData : null
     })
-     this.props.history.push('/')
+    console.log('%%%%%')
      console.log(this.state)
    })
    .then(()=>{
@@ -152,6 +154,7 @@ class App extends React.Component{
             <Route exact path="/editpassword" render={() => <Edit userData={this.state.userData}></Edit>}></Route>
             <Route exact path="/writeform" render={()=> <WriteForm userData={this.state.userData} HandleTextCreate={this.HandleTextCreate}></WriteForm>}></Route>
             <Route exact path="/updateform" render={()=> <UpdateForm userData={this.state.userData} text_id={this.state.text_id} HandleTextUpdate={this.HandleTextUpdate}></UpdateForm>}></Route>
+            <Route exact path="/bye" render={()=> <Bye/>} />
           </Switch>
 
     );
