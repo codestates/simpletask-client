@@ -20,6 +20,7 @@ class App extends React.Component{
       userData: null,
       text : null,
       text_id: null,
+      accessToken: ''
     }
     this.loginHandler = this.loginHandler.bind(this);
     this.logoutHandler = this.logoutHandler.bind(this);
@@ -30,9 +31,25 @@ class App extends React.Component{
     this.HandleTextIdThrow = this.HandleTextIdThrow.bind(this);
     this.HandleTextCreate = this.HandleTextCreate.bind(this);
     this.HandleTextUpdate = this.HandleTextUpdate.bind(this);
+    this.getAccessToken = this.getAccessToken.bind(this);
+    this.getGitHubUserInfo = this.getGitHubUserInfo.bind(this)
   }
 // 앱 실행되면 전체 컨텐츠 목록 받아오기
   componentDidMount(){
+
+    const url = new URL(window.location.href)
+    console.log("url :" + url)
+    const authorizationCode = url.searchParams.get('code')
+    console.log("authorizationCode :" + authorizationCode)
+    if (authorizationCode) {
+      this.getAccessToken(authorizationCode)
+    }
+    // this.getGitHubUserInfo()
+
+    // ///////////////////////////////////////////
+    axios.get("http://localhost:8080/contents")
+    .then((res)=>{ 
+      // console.log(res.data.data,"get@@@@@@@@@");
     axios.get("http://localhost:8000/contents")
     .then((res)=>{
       console.log(res.data.data,"get@@@@@@@@@");
@@ -40,6 +57,36 @@ class App extends React.Component{
         text : res.data.data
       })
     })
+  }
+  async getAccessToken(authorizationCode) { // authorization-code를 전달하여 token으로 교환 
+    let resp = await axios.post('http://localhost:8080/callback', { authorizationCode: authorizationCode })
+      console.log(resp)
+    this.setState({
+      isLogin: true,
+      accessToken: resp.data.accessToken
+    })
+    this.getGitHubUserInfo()
+  } 
+  async getGitHubUserInfo() {  // githunb에 token 전달하여 email, login 받아 state 업데이트
+    const  accessToken  = this.state.accessToken
+    let response = await axios.get('https://api.github.com/user', {
+      headers: {
+        authorization: `token ${accessToken}`,
+      }
+    })
+    console.log(response)
+    const { email, login, name, created_at } = response.data
+    this.setState({
+      userData: {
+        isGit: true,
+        email ,
+        name: login,
+        nickname: name,
+        createdAt: created_at
+      }
+    })
+    console.log(this.state.userData)
+    this.props.history.push('/');
   }
   // user정보 및 isLogin 변환
   loginHandler(obj){
@@ -144,13 +191,13 @@ class App extends React.Component{
   
 
   render(){
+    const {isLogin, accessToken} = this.state
     return (
-
           <Switch>
             <Route exact path="/" render={() => <MainPage isLogin={this.state.isLogin} texts={this.state.text} userData={this.state.userData} logoutHandler={this.logoutHandler} HandleTextDelete={this.HandleTextDelete} HandleTextIdThrow={this.HandleTextIdThrow}></MainPage>}></Route>
             <Route exact path="/signin" render={() => <Login loginHandler = {this.loginHandler} textHandler ={this.textHandler} nomemberLoginHandler={this.nomemberLoginHandler}></Login>}></Route>
             <Route exact path="/signup" render={() => <Signup></Signup>}></Route>
-            <Route exact path="/mypage" render={() => <Mypage isLogin={this.state.isLogin} userData={this.state.userData} ViewEdit={this.ViewEdit} deleteHand={this.deleteHand} ></Mypage>}></Route>
+            <Route exact path="/mypage" render={() => <Mypage isLogin={this.state.isLogin} userData={this.state.userData} ViewEdit={this.ViewEdit} deleteHand={this.deleteHand} accessToken={this.state.accessToken}></Mypage>}></Route>
             <Route exact path="/editpassword" render={() => <Edit userData={this.state.userData}></Edit>}></Route>
             <Route exact path="/writeform" render={()=> <WriteForm userData={this.state.userData} HandleTextCreate={this.HandleTextCreate}></WriteForm>}></Route>
             <Route exact path="/updateform" render={()=> <UpdateForm userData={this.state.userData} text_id={this.state.text_id} HandleTextUpdate={this.HandleTextUpdate}></UpdateForm>}></Route>

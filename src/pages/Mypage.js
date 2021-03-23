@@ -4,8 +4,8 @@ import axios from 'axios';
 //props는 userdata 
 function  Mypage ({userData,deleteHand}) {
 //    '/deleteid' 아이디삭제
-let history = useHistory()
 
+let history = useHistory()
    return ( 
     <div>
       <center>
@@ -19,15 +19,24 @@ let history = useHistory()
        <div>
          닉네임 : {userData.nickname}
         </div>
+
         {userData.friend ? <div>관심있는 사람 : {userData.friend}</div> : ''}
         <div>생성일 : {userData.createdAt}</div>
-        <span>      
-          <button onClick={()=>{history.push('editpassword') }}>비밀번호 변경</button>
+        <Link to="/" > 메인페이지 </Link>
+
+        <span>
+          {userData.isGit === false ?
+          <div>
+                  <button to="/editpassword"> 비밀번호 변경 </button>
+                  <button onClick={deleteHand}>회원 탈퇴</button>
+                  </div>
+                  : ''
+          }
         </span>
        <span>
-         <button onClick={()=>{history.push("/")}}>메인페이지</button>
+       <span>
        </span>
-       <button onClick={deleteHand}>회원 탈퇴</button>
+
      </center>
     </div>
    ) 
