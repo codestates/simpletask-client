@@ -1,8 +1,10 @@
 import React from "react"
 import {Link,withRouter} from "react-router-dom";
+import axios from 'axios';
 //props는 userdata 
-function  Mypage ({userData}) {
-   return (
+function  Mypage ({userData,deleteHand}) {
+//    '/deleteid' 아이디삭제
+   return ( 
     <div>
       <center>
           <h1>마이페이지</h1>
@@ -21,8 +23,9 @@ function  Mypage ({userData}) {
        <span>
         <Link to="/" > 메인페이지 </Link>
        </span>
+       <button onClick={deleteHand}>회원 탈퇴</button>
      </center>
     </div>
-   )
+   ) 
 }
 export default withRouter(Mypage)

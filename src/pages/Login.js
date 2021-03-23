@@ -35,24 +35,24 @@ class Login extends React.Component{
        }
 
     
-       axios.post("http://localhost:8080/signin",
-      {email:this.state.email, password:this.state.password})
-      .then(()=>{
-          console.log("@@@@로그인보냄@@@@@@@")
-          console.log(this.state.email)
-          return axios.post("http://localhost:8080/user",{email:this.state.email})
-      })
-      .then((res)=>{
-          console.log(res.data.data,"@@@@@@정보가져오기@@@@@@@")
-          this.props.loginHandler(res.data.data)
+        axios.post("http://localhost:8080/signin",
+            {email:this.state.email, password:this.state.password})
+        .then(()=>{
+            console.log("@@@@로그인보냄@@@@@@@")
+            console.log(this.state.email)
+            return axios.post("http://localhost:8080/user",{email:this.state.email})
+        })
+        .then((res)=>{
+            console.log(res.data.data,"@@@@@@정보가져오기@@@@@@@")
+            this.props.loginHandler(res.data.data)
         
-          this.props.history.push('/')
+            this.props.history.push('/')
          
-      })
-      .catch(err=>{
+        })
+        .catch(err=>{
          
-          console.log(err);
-      })
+            console.log(err);
+        })
     }
  
     nomemberLogin(){

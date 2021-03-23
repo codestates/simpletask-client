@@ -4,27 +4,13 @@ import axios from "axios";
 import { Switch, Route, Redirect, withRouter, useHistory } from "react-router-dom";
 
 import TextEntry from "./textEntry"
+import UpdateForm from "./UpdateForm";
+
 // user_id:
-function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete}) {
+function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, HandleTextIdThrow}) {
     
-    // let history = useHistory()
+    let history = useHistory()
 
-    // function signinClick() {
-    //     history.push("/signin");
-    // }
-
-    // function signupClick() {
-    //     history.push("/signup")
-    // }
-
-    // function mypageClick() {
-    //     history.push("/mypage")
-    // }
-
-    // function signoutClick() {
-    //     props.signout()
-    // }
-   
     //지금 디드 마운팅 보다 map 이 먼저 읽어가지고 나오지가 않음
 
     console.log(isLogin);
@@ -51,11 +37,14 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete}) {
         text.textContent = obj.text;
         date.textContent = obj.createdAt;
         editBtn.textContent = "수정";
-        editBtn.id = obj.user_id;
+        editBtn.id = obj.id;
+        editBtn.value = obj.user_id
         deleteBtn.textContent = "삭제";
-        deleteBtn.id = obj.user_id;
+        deleteBtn.id = obj.id;
+        deleteBtn.value = obj.user_id;
 
-        deleteBtn.addEventListener('click', deleteTextHandler)
+        editBtn.addEventListener('click', updateTextHandler);
+        deleteBtn.addEventListener('click', deleteTextHandler);
 
         buttons.append(editBtn, deleteBtn)
         content.append(title, text, date, buttons);
@@ -106,16 +95,29 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete}) {
         renderContent();
     }
 
+    let updateTextHandler = (event) =>{
+        let targetName = event.target;
+        console.log(targetName.id);
+        if(targetName.value === userData.email){
+            console.log('ok');
+            HandleTextIdThrow(targetName.id);
+            history.push('/updateform')
+        }else{
+            console.log('no')
+        }
+
+
+    }
+
     let deleteTextHandler = (event) =>{
-        let targetName = event.target.id
-        console.log(targetName);
-        if(targetName === userData.email){
+        let targetName = event.target;
+        console.log(targetName.id);
+        if(targetName.value === userData.email){
             console.log('ok')
-            HandleTextDelete();
+            HandleTextDelete(targetName.id);
         }else{
             console.log('no');
         }
-
 
     }
 
@@ -170,7 +172,7 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete}) {
                     <div className="contents_outside">
                         <div className="contents_inside">
                             {texts.map(text =>
-                                <TextEntry texts={text} key = {text.id}/>
+                                <TextEntry texts={text} key = {text.id} userData={userData} HandleTextDelete={HandleTextDelete} HandleTextIdThrow={HandleTextIdThrow}/>
                                 )}
                         </div>
                     </div>
@@ -182,7 +184,7 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete}) {
                         <div>
                         <button onClick={() => reset()}> 전체글 </button> 
                         <button onClick={() => filtering()}> 내가작성한글만 </button>
-                        <button > 글쓰기  </button>
+                        <button onClick={() => history.push("/writeform")}> 글쓰기  </button>
                         <Link to="/writeform"> 글 쓰기</Link>
                     </div>
                     ) : (

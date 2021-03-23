@@ -1,5 +1,5 @@
 import React from "react";
-import {Link,} from "react-router-dom";
+import {Link, Switch, Route, Redirect, withRouter, useHistory } from "react-router-dom";
 import axios from 'axios';
 
 class Signup extends React.Component {
@@ -40,6 +40,10 @@ class Signup extends React.Component {
   {email:this.state.email ,name:this.state.name, password:this.state.password, nickname:this.state.nickname})
   .then(()=>{
     console.log("@@@@@@@@@@아이디생성됨@@@@@@@@");
+    alert("아이디 생성 완료");
+  })
+  .then((res) =>{
+    this.props.history.push('/');
   })
   .catch(err=>{
     console.log(err);

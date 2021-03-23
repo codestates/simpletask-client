@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import { Switch, Route, Redirect, withRouter, useHistory } from "react-router-dom";
 
-class WriteForm extends React.Component{
+class UpdateForm extends React.Component{
     constructor(props){
         super(props)
         this.state ={
@@ -12,34 +12,19 @@ class WriteForm extends React.Component{
 
         }
         this.handleInputValue = this.handleInputValue.bind(this);
-        this.createWrite = this.createWrite.bind(this);
+        this.updateText = this.updateText.bind(this);
     }
 
     handleInputValue = (key) => (e) => {
         this.setState({[key]: e.target.value});
     }
 
-    createWrite(){
-        if(!this.state.title){
-            alert("제목을 입력해주세요");
-            return;
-        }
-        console.log(this.state.title, this.state.text, this.props.userData.email);
-        let textInfo = {title: this.state.title, text: this.state.text, user_id: this.props.userData.email}
-        this.props.HandleTextCreate(textInfo);
+    updateText(){
+        console.log(this.state);
+        console.log(this.props.text_id);
+        let textInfo = {title: this.state.title, text: this.state.text, id: this.props.text_id}
+        this.props.HandleTextUpdate(textInfo);
         this.props.history.push("/");
-
-        /*axios.post("http://localhost:8080/create",
-            {title:this.state.title, text:this.state.text, user_id: this.props.userData.email})
-        .then(() => {
-            console.log("작성한 글 보내기");
-            console.log(this.state.title, this.state.text);
-        })
-        .then((res) =>{
-            this.props.history.push("/");
-        })
-        .catch((err) => console.log(err));*/
-
     }
 
     render(){
@@ -48,7 +33,7 @@ class WriteForm extends React.Component{
             <div>
                 <header>
                     <center>
-                        <h1>글 쓰기</h1>
+                        <h1>글 수정</h1>
                     </center>
                 </header>
                 <main>
@@ -62,8 +47,8 @@ class WriteForm extends React.Component{
                     </div>
                     <div>
                         <Link to="/">이전으로</Link>
-                        <button>이전으로</button>
-                        <button onClick={this.createWrite}>작성하기</button>
+                        <button to="/">이전으로</button>
+                        <button onClick={this.updateText}>수정하기</button>
                     </div>
                 </main>
             </div>
@@ -71,4 +56,4 @@ class WriteForm extends React.Component{
     }
 }
 
-export default withRouter(WriteForm);
+export default withRouter(UpdateForm);
