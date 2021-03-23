@@ -74,7 +74,7 @@ class App extends React.Component{
   }
   //회원탈퇴
   deleteHand(){
-    this.props.history.push('/')
+    this.props.history.push('/bye')
     console.log("@@@@@@@@삭제@@@@@@@");
     console.log(this.state.userData);
     console.log(this.state.userData.id);
