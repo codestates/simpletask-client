@@ -35,14 +35,18 @@ const TextEntry = ({userData, texts, HandleTextDelete, HandleTextIdThrow}) =>{
 
     return(
         <div className="contents">
-            <div className='id'>글 번호 : {texts.id}</div>
-            <div className='name'>작성자 : {texts.user_id}</div>
-            <div className="title">제목 : {texts.title}</div>
-            <div className="text">내용 : {texts.text}</div>
-            <div className="date">작성일 : {texts.createdAt}</div>
-            <div>
-                <button id={texts.id} value={texts.user_id} onClick={updateTextHandler}>수정</button>
-                <button id={texts.id} value={texts.user_id} onClick={deleteTextHandler}>삭제</button>
+            <div className='content_title'>
+                <span className="title">제목 : {texts.title}</span>
+                {/* <span className='contents_id'>글 번호 : {texts.id}</span> */}
+                <span className='editbt'>
+                    <button id={texts.id} value={texts.user_id} onClick={updateTextHandler}>수정</button>
+                    <button id={texts.id} value={texts.user_id} onClick={deleteTextHandler}>삭제</button>
+                </span>
+            </div>
+            <div className='content_text'>
+                <div className='name'>작성자 : {texts.user_id}</div>
+                <div className="text">내용 : {texts.text}</div>
+                <div className="date">작성일 : {texts.createdAt}</div>
             </div>
        </div>
     )

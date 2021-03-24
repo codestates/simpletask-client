@@ -20,7 +20,7 @@ class App extends React.Component{
       userData: null,
       text : null,
       text_id: null,
-      accessToken: ''
+      accessToken: '',
     }
     this.loginHandler = this.loginHandler.bind(this);
     this.logoutHandler = this.logoutHandler.bind(this);
@@ -36,28 +36,34 @@ class App extends React.Component{
   }
 // 앱 실행되면 전체 컨텐츠 목록 받아오기
   componentDidMount(){
-
+    // this.getGitHubUserInfo()
     const url = new URL(window.location.href)
     console.log("url :" + url)
     const authorizationCode = url.searchParams.get('code')
     console.log("authorizationCode :" + authorizationCode)
     if (authorizationCode) {
       this.getAccessToken(authorizationCode)
+      console.log("testing")
     }
-    // this.getGitHubUserInfo()
-
+    
     // ///////////////////////////////////////////
     axios.get("http://localhost:8080/contents")
     .then((res)=>{ 
       // console.log(res.data.data,"get@@@@@@@@@");
-    axios.get("http://localhost:8000/contents")
+      return axios.get("http://localhost:8080/contents")
+    })
     .then((res)=>{
       console.log(res.data.data,"get@@@@@@@@@");
       this.setState({
         text : res.data.data
       })
     })
+
+    const htmlTitle = document.querySelector("title");
+    htmlTitle.innerHTML = 'Simpletask';
+    
   }
+
   async getAccessToken(authorizationCode) { // authorization-code를 전달하여 token으로 교환 
     let resp = await axios.post('http://localhost:8080/callback', { authorizationCode: authorizationCode })
       console.log(resp)
@@ -67,6 +73,7 @@ class App extends React.Component{
     })
     this.getGitHubUserInfo()
   } 
+
   async getGitHubUserInfo() {  // githunb에 token 전달하여 email, login 받아 state 업데이트
     const  accessToken  = this.state.accessToken
     let response = await axios.get('https://api.github.com/user', {
@@ -104,7 +111,7 @@ class App extends React.Component{
   //    console.log(this.state , "2번쨰 state");
   //  }
   logoutHandler(){
-   axios.post(('http://localhost:8000/signout'))
+   axios.post(('http://localhost:8080/signout'))
    .then(()=>{
     this.setState({
       isLogin: false,
@@ -125,7 +132,7 @@ class App extends React.Component{
     console.log("@@@@@@@@삭제@@@@@@@");
     console.log(this.state.userData);
     console.log(this.state.userData.id);
-   axios.post("http://localhost:8000/deleteid",{email:this.state.userData.email})
+   axios.post("http://localhost:8080/deleteid",{email:this.state.userData.email})
    .then(()=>{
      console.log("@@@@@@삭제됨@@@@@@@");
      this.setState({
@@ -144,7 +151,7 @@ class App extends React.Component{
   //글 작성 함수
   HandleTextCreate(obj){
     console.log('글 작성 함수 실행');
-    axios.post("http://localhost:8000/create", obj)
+    axios.post("http://localhost:8080/create", obj)
     .then(() => {
       console.log('글 작성 완료');
       this.componentDidMount();
@@ -165,7 +172,7 @@ class App extends React.Component{
   //글 수정 함수
   HandleTextUpdate(obj){
     console.log('글 수정 함수 실행');
-    axios.post("http://localhost:8000/edit", obj)
+    axios.post("http://localhost:8080/edit", obj)
     .then(() => {
       console.log('글 수정 완료');
       this.componentDidMount();
@@ -180,7 +187,7 @@ class App extends React.Component{
   HandleTextDelete(int){
     console.log("글 삭제 함수 실행");
     console.log(this.state.text.id)
-    axios.post("http://localhost:8000/delete", {id: int})
+    axios.post("http://localhost:8080/delete", {id: int})
     .then(() => {
       console.log('글 삭제 완료');
       this.componentDidMount();
@@ -188,7 +195,7 @@ class App extends React.Component{
     .catch((err) => console.log(err))
   }
 
-  
+  // addfriend()
 
   render(){
     const {isLogin, accessToken} = this.state
@@ -197,7 +204,7 @@ class App extends React.Component{
             <Route exact path="/" render={() => <MainPage isLogin={this.state.isLogin} texts={this.state.text} userData={this.state.userData} logoutHandler={this.logoutHandler} HandleTextDelete={this.HandleTextDelete} HandleTextIdThrow={this.HandleTextIdThrow}></MainPage>}></Route>
             <Route exact path="/signin" render={() => <Login loginHandler = {this.loginHandler} textHandler ={this.textHandler} nomemberLoginHandler={this.nomemberLoginHandler}></Login>}></Route>
             <Route exact path="/signup" render={() => <Signup></Signup>}></Route>
-            <Route exact path="/mypage" render={() => <Mypage isLogin={this.state.isLogin} userData={this.state.userData} ViewEdit={this.ViewEdit} deleteHand={this.deleteHand} accessToken={this.state.accessToken}></Mypage>}></Route>
+            <Route exact path="/mypage" render={() => <Mypage isLogin={this.state.isLogin} userData={this.state.userData} ViewEdit={this.ViewEdit} deleteHand={this.deleteHand} accessToken={this.state.accessToken} ></Mypage>}></Route>
             <Route exact path="/editpassword" render={() => <Edit userData={this.state.userData}></Edit>}></Route>
             <Route exact path="/writeform" render={()=> <WriteForm userData={this.state.userData} HandleTextCreate={this.HandleTextCreate}></WriteForm>}></Route>
             <Route exact path="/updateform" render={()=> <UpdateForm userData={this.state.userData} text_id={this.state.text_id} HandleTextUpdate={this.HandleTextUpdate}></UpdateForm>}></Route>

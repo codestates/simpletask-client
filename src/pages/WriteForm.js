@@ -46,12 +46,8 @@ class WriteForm extends React.Component{
         console.log(this.props.userData.email)
         return(
             <div>
-                <header>
-                    <center>
-                        <h1>글 쓰기</h1>
-                    </center>
-                </header>
-                <main>
+                <div className='bigtitle'>글 쓰기</div>
+                <main className='myinfo'>
                     <div>
                         <span>제목</span>
                         <input id="titleform" type="text" onChange={this.handleInputValue("title")}></input>
