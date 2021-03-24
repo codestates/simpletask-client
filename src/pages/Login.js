@@ -24,7 +24,7 @@ class Login extends React.Component{
        
        if(!this.state.email || !this.state.password) {
           this.setState({
-              err : "모든 항목 작성해주세요?"
+              err : "모든 항목 작성해주세요"
           })
           return ;
        }
@@ -35,16 +35,17 @@ class Login extends React.Component{
        }
 
     
-        axios.post("http://localhost:8000/signin",
+        axios.post("http://localhost:8080/signin",
             {email:this.state.email, password:this.state.password})
         .then(()=>{
             console.log("@@@@로그인보냄@@@@@@@")
             console.log(this.state.email)
-            return axios.post("http://localhost:8000/user",{email:this.state.email})
+            return axios.post("http://localhost:8080/user",{email:this.state.email})
         })
         .then((res)=>{
             console.log(res.data)
             console.log(res.data.data,"@@@@@@정보가져오기@@@@@@@")
+            res.data.data.isGit = false
             this.props.loginHandler(res.data.data)
         
             this.props.history.push('/')
@@ -69,8 +70,8 @@ class Login extends React.Component{
     render(){
         return(
             <div id="login">
-                <center>
-                    <h1>LogIn Page</h1>
+                <div className='bigtitle'>LogIn Page</div>
+                <div className='myinfo'>
                     <form onSubmit = {(e)=>{e.preventDefault()}}>
                         <div>
                             <span>Email </span>
@@ -83,20 +84,12 @@ class Login extends React.Component{
                         <div>
                             <Link to="/signup">아이디가 없으신가요?</Link>
                         </div>
-                        <div>
                             <button className="login-button" onClick={this.clickLoginhandle}>LogIn</button>
-                        </div>
-                        <div>
                             <button className="login-button" onClick={this.nomemberLogin}>비회원 로그인</button>
-                        </div>
-                        <div>
-                            <button onClick={() => this.gitOauth()}>
-                                git 로그인
-                            </button> 
-                        </div>
-                         {this.state.err ? <div  className="alert-box" >{this.state.err}</div> : ""} 
+                            <button onClick={() => this.gitOauth()}>git 로그인</button> 
                     </form>
-                </center>
+                        {this.state.err ? <div  className="alert-box" >{this.state.err}</div> : ""} 
+                </div>
             </div>
         )
     }
