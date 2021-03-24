@@ -31,7 +31,7 @@ class Edit extends React.Component{
            })
        }
         console.log(userData,"실행되냐");
-       return axios.post("http://localhost:8000/editpw",
+       return axios.post("http://localhost:8080/editpw",
        {email:userData.email, password:EditPassword})
         .then((res)=>{
             console.log(res,"@@변경됨@@@@");

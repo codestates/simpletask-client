@@ -36,7 +36,7 @@ class Signup extends React.Component {
       })
     }
     console.log("@@@@@@@@@@@@@아이디생성@@@@@@@@@@@");
-  return axios.post("http://localhost:8000/signup",
+  return axios.post("http://localhost:8080/signup",
   {email:this.state.email ,name:this.state.name, password:this.state.password, nickname:this.state.nickname})
   .then(()=>{
     console.log("@@@@@@@@@@아이디생성됨@@@@@@@@");

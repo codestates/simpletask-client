@@ -10,6 +10,7 @@ import axios from "axios";
 import WriteForm from "./pages/WriteForm";
 import UpdateForm from "./pages/UpdateForm";
 import Bye from "./pages/Bye"
+import Weather from "./pages/Weather";
 
 // import axios from 'axios';
 class App extends React.Component{
@@ -33,7 +34,7 @@ class App extends React.Component{
   }
 // 앱 실행되면 전체 컨텐츠 목록 받아오기
   componentDidMount(){
-    axios.get("http://localhost:8000/contents")
+    axios.get("http://localhost:8080/contents")
     .then((res)=>{
       console.log(res.data.data,"get@@@@@@@@@");
       this.setState({
@@ -57,7 +58,7 @@ class App extends React.Component{
   //    console.log(this.state , "2번쨰 state");
   //  }
   logoutHandler(){
-   axios.post(('http://localhost:8000/signout'))
+   axios.post(('http://localhost:8080/signout'))
    .then(()=>{
     this.setState({
       isLogin: false,
@@ -78,7 +79,7 @@ class App extends React.Component{
     console.log("@@@@@@@@삭제@@@@@@@");
     console.log(this.state.userData);
     console.log(this.state.userData.id);
-   axios.post("http://localhost:8000/deleteid",{email:this.state.userData.email})
+   axios.post("http://localhost:8080/deleteid",{email:this.state.userData.email})
    .then(()=>{
      console.log("@@@@@@삭제됨@@@@@@@");
      this.setState({
@@ -97,7 +98,7 @@ class App extends React.Component{
   //글 작성 함수
   HandleTextCreate(obj){
     console.log('글 작성 함수 실행');
-    axios.post("http://localhost:8000/create", obj)
+    axios.post("http://localhost:8080/create", obj)
     .then(() => {
       console.log('글 작성 완료');
       this.componentDidMount();
@@ -118,7 +119,7 @@ class App extends React.Component{
   //글 수정 함수
   HandleTextUpdate(obj){
     console.log('글 수정 함수 실행');
-    axios.post("http://localhost:8000/edit", obj)
+    axios.post("http://localhost:8080/edit", obj)
     .then(() => {
       console.log('글 수정 완료');
       this.componentDidMount();
@@ -133,7 +134,7 @@ class App extends React.Component{
   HandleTextDelete(int){
     console.log("글 삭제 함수 실행");
     console.log(this.state.text.id)
-    axios.post("http://localhost:8000/delete", {id: int})
+    axios.post("http://localhost:8080/delete", {id: int})
     .then(() => {
       console.log('글 삭제 완료');
       this.componentDidMount();

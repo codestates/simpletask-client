@@ -35,12 +35,12 @@ class Login extends React.Component{
        }
 
     
-        axios.post("http://localhost:8000/signin",
+        axios.post("http://localhost:8080/signin",
             {email:this.state.email, password:this.state.password})
         .then(()=>{
             console.log("@@@@로그인보냄@@@@@@@")
             console.log(this.state.email)
-            return axios.post("http://localhost:8000/user",{email:this.state.email})
+            return axios.post("http://localhost:8080/user",{email:this.state.email})
         })
         .then((res)=>{
             console.log(res.data.data,"@@@@@@정보가져오기@@@@@@@")

@@ -2,9 +2,11 @@ import React from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import { Switch, Route, Redirect, withRouter, useHistory } from "react-router-dom";
+import Clock from "react-live-clock";
 
 import TextEntry from "./textEntry"
 import UpdateForm from "./UpdateForm";
+import Weather from "./Weather";
 
 // user_id:
 function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, HandleTextIdThrow}) {
@@ -151,6 +153,12 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
             <header>
                 <center>
                   <h1>MainPage</h1>
+                    <div>
+                        <Weather></Weather>
+                    </div>
+                    <div>
+                        <Clock format={'YYYY년 MM월 DD일 HH:mm:ss'} ticking={true} timezone={'Aisa/Seoul'}></Clock>
+                    </div>
                   <div>
                       {/* <span>logout버튼아니면link로해야될듯   </span>
                       <span>mypage이동</span> */}
