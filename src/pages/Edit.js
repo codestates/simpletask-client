@@ -41,27 +41,29 @@ class Edit extends React.Component{
         console.log(err);
         })
     }
-   render(){
-       return (
-           <div>
-               <center>
-                   <h1>비밀번호 수정</h1>
-               <div>
-                   비밀번호 <input type="password" onChange = {this.handleInputValue("Password")}></input>
-               </div>
-               <div>
-                   바꿀 비밀번호 <input type="password" onChange = {this.handleInputValue("EditPassword")}></input>
-               </div>
-               <span>
-                 <button onClick = {this.ClickEdithandle}>변경</button>
-               </span>
-               <span>
-                 <button onClick = {()=>{this.props.history.push('/mypage')}}>취소</button>
-               </span>
-               {this.state.err ? <div  className="alert-box">{this.state.err}</div> : ""}
-               </center>
-           </div>
-       )
-   }
+    render(){
+        return (
+            <div>
+                <div className='bigtitle'>비밀번호 수정</div>
+                <div className='myinfo'>
+                    <div>
+                        <div className="editpwTag">현재 비밀번호</div>
+                        <input className="infoForm" type="password" onChange = {this.handleInputValue("Password")}></input>
+                    </div>
+                    <div>
+                        <div className="editpwTag">바꿀 비밀번호</div>
+                        <input className="infoForm" type="password" onChange = {this.handleInputValue("EditPassword")}></input>
+                    </div>
+                    <span>
+                        <button className="editpwBtn" onClick = {this.ClickEdithandle}>변경</button>
+                    </span>
+                    <span>
+                        <button className="editpwBtn" onClick = {()=>{this.props.history.push('/mypage')}}>취소</button>
+                    </span>
+                        {this.state.err ? <div  className="alert-box">{this.state.err}</div> : ""}
+                </div>
+            </div>
+        )
+    }
 }
 export default withRouter(Edit)

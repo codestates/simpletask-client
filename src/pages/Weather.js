@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Clock from "react-live-clock"
 
 class Weather extends React.Component{
     constructor(props){
@@ -38,7 +39,12 @@ class Weather extends React.Component{
         }else{
             return(
                 <div className="App">
-                    <p>현재 기온 : {(this.state.temp - 273.15).toFixed(1)}C</p>
+                    <div>
+                        <Clock format={'YYYY년 MM월 DD일 HH:mm:ss'} ticking={true} ></Clock>
+                        &nbsp; &nbsp; &nbsp;현재 기온 : {(this.state.temp - 273.15).toFixed(1)}C
+                    </div>
+                    
+
                 </div>
             )
         }

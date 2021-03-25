@@ -25,7 +25,7 @@ class Signup extends React.Component {
     
     if(!this.state.email || !this.state.name ||! this.state.password || !this.state.nickname){
       this.setState({
-        err : "모든항목작성"
+        err : "모든 항목을 작성해 주세요"
       })
       return ;
     }
@@ -55,32 +55,31 @@ class Signup extends React.Component {
   render(){
     return (
       <div>
-        <center>
-          <h1>회원가입</h1>
-          <div>
-            이메일
-            <input type="email" onChange= {this.handleInputValue("email")} ></input>
-          </div>
+          <div className='bigtitle'>회원가입</div>
+          <div className='myinfo'>
             <div>
-              이름
-            <input    onChange= {this.handleInputValue("name")}></input>
+              <div className="signupEx">이메일</div>
+              <input className="infoForm" type="email" onChange= {this.handleInputValue("email")} ></input>
             </div>
-          <div>
-             비밀번호
-             <input type="password" onChange= {this.handleInputValue("password")}></input>
-          </div>
-          <div>
-             닉네임
-             <input  onChange= {this.handleInputValue("nickname")}></input>
-          </div>
-          <div>
-            <Link to="/signin">이미 아이디를 갖고 계신가요?</Link>  
-          </div>
-          <button onClick={this.handleSignup} className="signupBtn">클릭</button>
-
+            <div>
+              <div className="signupEx">이름</div>
+              <input className="infoForm" onChange= {this.handleInputValue("name")}></input>
+            </div>
+            <div>
+              <div className="signupEx">비밀번호</div>
+              <input className="infoForm" type="password" onChange= {this.handleInputValue("password")}></input>
+            </div>
+            <div>
+              <div className="signupEx">닉네임</div>
+              <input className="infoForm" onChange= {this.handleInputValue("nickname")}></input>
+            </div>
+            <div>
+              <Link to="/signin">이미 아이디를 갖고 계신가요?</Link>  
+            </div>
+            <button className="signupBtn" onClick={this.handleSignup} className="signupBtn">회원가입</button>
           <div>{this.state.err}</div>
+          </div>
 
-        </center>
       </div>
     )
   }

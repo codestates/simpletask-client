@@ -24,7 +24,7 @@ class Login extends React.Component{
        
        if(!this.state.email || !this.state.password) {
           this.setState({
-              err : "모든 항목 작성해주세요?"
+              err : "모든 항목 작성해주세요"
           })
           return ;
        }
@@ -43,7 +43,9 @@ class Login extends React.Component{
             return axios.post("http://localhost:8080/user",{email:this.state.email})
         })
         .then((res)=>{
+            console.log(res.data)
             console.log(res.data.data,"@@@@@@정보가져오기@@@@@@@")
+            res.data.data.isGit = false
             this.props.loginHandler(res.data.data)
         
             this.props.history.push('/')
@@ -59,33 +61,35 @@ class Login extends React.Component{
         this.props.nomemberLoginHandler();
         this.props.history.push('/');
     }
+    
+    gitOauth() {
+        window.location.assign('https://github.com/login/oauth/authorize?client_id=77ea45a221e7f8a02f07')
+        // git login 클릭시 인증 페이지로 리디렉션
+    }
 
     render(){
         return(
             <div id="login">
-                <center>
-                    <h1>LogIn Page</h1>
+                <div className='bigtitle'>LogIn Page</div>
+                <div className='myinfo'>
                     <form onSubmit = {(e)=>{e.preventDefault()}}>
                         <div>
-                            <span>Email </span>
-                            <input type="email" onChange = {this.handleInputValue("email")}></input>
+                            <div className="loginmach">Email </div>
+                            <input className="infoForm" type="email" onChange = {this.handleInputValue("email")}></input>
                         </div>
                         <div>
-                            <span>Password </span>
-                            <input type="password" onChange ={this.handleInputValue("password")}></input>
+                            <div className="loginmach">Password </div>
+                            <input className="infoForm" type="password" onChange ={this.handleInputValue("password")}></input>
                         </div>
                         <div>
                             <Link to="/signup">아이디가 없으신가요?</Link>
                         </div>
-                        <div>
-                            <button className="login-button" onClick={this.clickLoginhandle}>LogIn</button>
-                        </div>
-                        <div>
-                            <button className="login-button" onClick={this.nomemberLogin}>비회원 로그인</button>
-                        </div>
-                         {this.state.err ? <div  className="alert-box" >{this.state.err}</div> : ""} 
+                            <button className="smallbt2" onClick={this.clickLoginhandle}>LogIn</button>
+                            <button className="smallbt2" onClick={this.nomemberLogin}>비회원 로그인</button>
+                            <button className="smallbt2" onClick={() => this.gitOauth()}>git 로그인</button> 
                     </form>
-                </center>
+                        {this.state.err ? <div  className="alert-box" >{this.state.err}</div> : ""} 
+                </div>
             </div>
         )
     }
