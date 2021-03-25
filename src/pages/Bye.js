@@ -9,11 +9,9 @@ function Bye () {
     }
 
     return (
-        <div>
-            <center>
-                <h1>그동안 감사했습니다.</h1>
-                <button onClick = {mainClick}> 메인페이지로</button>
-            </center>
+        <div className="myinfo">
+            <h1>그동안 감사했습니다.</h1>
+            <button className="byeBtn" onClick = {mainClick}> 메인페이지로</button>
         </div>
     )
 }

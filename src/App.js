@@ -84,19 +84,14 @@ class App extends React.Component{
     })
     this.props.history.push('/');
   }
-  // user정보 및 isLogin 변환
+
   loginHandler(obj){
        this.setState({
          isLogin :  true,
          userData : obj,
        })
     }
-  //text state 변환시켜주기
-  //  textHandler(obj){
-  //    this.setState({
-  //      text : obj
-  //    })
-  //  }
+
   logoutHandler(){
    axios.post(('https://52.79.241.137:8080/signout'))
    .then(()=>{
@@ -106,13 +101,13 @@ class App extends React.Component{
     })
    })
   }
-  // 비회원 로그인 
+
   nomemberLoginHandler(){
     this.setState({
       isLogin: true
     })
   }
-  //회원탈퇴
+
   deleteHand(){
     this.props.history.push('/bye')
    axios.post("https://52.79.241.137:8080/deleteid",{email:this.state.userData.email})
@@ -128,7 +123,6 @@ class App extends React.Component{
   .catch(err=>console.log(err))
   }
 
-  //글 작성 함수
   HandleTextCreate(obj){
     axios.post("https://52.79.241.137:8080/create", obj)
     .then(() => {
@@ -140,14 +134,12 @@ class App extends React.Component{
     .catch((err) => console.log(err));
   }
 
-  //글 수정 텍스트 아이디 전달함수
   HandleTextIdThrow(int){
     this.setState({
       text_id: int
     })
   }
 
-  //글 수정 함수
   HandleTextUpdate(obj){
     axios.post("https://52.79.241.137:8080/edit", obj)
     .then(() => {
@@ -159,7 +151,6 @@ class App extends React.Component{
     .catch((err) => console.log(err));
   }
 
-  //글 삭제 함수
   HandleTextDelete(int){
     axios.post("https://52.79.241.137:8080/delete", {id: int})
     .then(() => {
@@ -167,8 +158,6 @@ class App extends React.Component{
     })
     .catch((err) => console.log(err))
   }
-
-  // addfriend()
 
   render(){
     const {isLogin, accessToken} = this.state

@@ -32,16 +32,16 @@ class WriteForm extends React.Component{
                 <div className='bigtitle'>글 쓰기</div>
                 <main className='myinfo'>
                     <div>
-                        <span>제목</span>
-                        <input id="titleform" type="text" onChange={this.handleInputValue("title")}></input>
+                        <span className="writeTag">제목</span>
+                        <input className="titleform" type="text" onChange={this.handleInputValue("title")}></input>
                     </div>
                     <div>
-                        <span>내용</span>
-                        <textarea id="textform" onChange={this.handleInputValue("text")}></textarea>
+                        <span className="writeTag">내용</span>
+                        <textarea className="textform" onChange={this.handleInputValue("text")}></textarea>
                     </div>
                     <div>
-                        <button onClick={() => this.props.history.push('/')}>이전으로</button>
-                        <button onClick={this.createWrite}>작성하기</button>
+                        <button className="create_updateBtn" onClick={() => this.props.history.push('/')}>이전으로</button>
+                        <button className="create_updateBtn" onClick={this.createWrite}>작성하기</button>
                     </div>
                 </main>
             </div>

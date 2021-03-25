@@ -14,12 +14,10 @@ class Login extends React.Component{
         this.nomemberLogin = this.nomemberLogin.bind(this);
     }
     handleInputValue = (key) => (e) => {
-        this.setState({ [key]: e.target.value });
-    
-      };
+        this.setState({ [key]: e.target.value });    
+    };
 
-    clickLoginhandle(){
-       
+    clickLoginhandle(){       
         if(!this.state.email || !this.state.password) {
           this.setState({
               err : "모든 항목 작성해주세요"
@@ -63,19 +61,19 @@ class Login extends React.Component{
                 <div className='myinfo'>
                     <form onSubmit = {(e)=>{e.preventDefault()}}>
                         <div>
-                            <span>Email </span>
-                            <input type="email" onChange = {this.handleInputValue("email")}></input>
+                            <div className="loginmach">Email </div>
+                            <input className="infoForm" type="email" onChange = {this.handleInputValue("email")}></input>
                         </div>
                         <div>
-                            <span>Password </span>
-                            <input type="password" onChange ={this.handleInputValue("password")}></input>
+                            <div className="loginmach">Password </div>
+                            <input className="infoForm" type="password" onChange ={this.handleInputValue("password")}></input>
                         </div>
                         <div>
                             <Link to="/signup">아이디가 없으신가요?</Link>
                         </div>
-                            <button className="login-button" onClick={this.clickLoginhandle}>LogIn</button>
-                            <button className="login-button" onClick={this.nomemberLogin}>비회원 로그인</button>
-                            <button onClick={() => this.gitOauth()}>git 로그인</button> 
+                            <button className="smallbt2" onClick={this.clickLoginhandle}>LogIn</button>
+                            <button className="smallbt2" onClick={this.nomemberLogin}>비회원 로그인</button>
+                            <button className="smallbt2" onClick={() => this.gitOauth()}>git 로그인</button> 
                     </form>
                         {this.state.err ? <div  className="alert-box" >{this.state.err}</div> : ""} 
                 </div>
