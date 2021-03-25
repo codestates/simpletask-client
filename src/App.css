@@ -1,38 +1,276 @@
-.App {
+.bigtitle {
+  margin-top: 10px;
+  width: 50rem;
+  border: 4px solid black;
+  padding: 2rem;
+  border-radius: 25px;
+  text-align: center;
+  margin-left: auto; margin-right: auto;
+  font-size: 3rem;
+}
+
+.smallbt {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 1000px;
+  padding: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.smallbt:hover{
+  background-color:lightgray
+}
+
+.btcollect1 {
+  margin-top: 20px;
+  height: 3rem;
+  width: 50rem;
+  text-align: right;
+  margin-left: auto; margin-right: auto;
+}
+
+.btcollect2 {
+  margin: 10px;
+  width: 50rem;
+  text-align: right;
+  margin-left: auto; margin-right: auto;
+}
+
+.contents {
+  border: 4px solid black;
+  border-radius: 15px;
+  padding: 0.3rem;
+  margin-left: auto; margin-right: auto;
+  margin-bottom: 10px;
+  background-color: black;
+  width: 50rem
+}
+
+.content_title {
+  color : white;
+  padding: 0.3rem;
+  padding-bottom: 0.5rem;
+}
+
+.content_text {
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.editbt {
+  text-align: right;
+  float: right;
+}
+
+.name {
+  border-bottom: 1px solid black;
+}
+
+.date {
+  border-top: 1px solid black;
+  padding-top: 5px;
+  padding-bottom: 0px;
+}
+
+.myinfo {
+  margin-top: 1rem;
+  border: 2px solid black;
+  margin-left: auto; margin-right: auto;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 30rem;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.text {
+  padding-top: 10px;
+  padding-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.addfriend {
+  padding-top: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.titleform{
+  width: 80%;
+  height: 20px;
+  margin: 1%;
 }
 
-.App-link {
-  color: #61dafb;
+.textform{
+  width: 80%;
+  height: 200px;
+  resize: none;
+  margin: 1%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.writeTag{
+  text-align: left;
+  vertical-align: top;
+  margin: 1%;
+  font-weight: 500;
+}
+
+.time-weather{
+  width: 50rem;
+  text-align: right;
+  margin-left: auto; margin-right: auto;
+  padding: auto;
+  font-size: 15px;
+}
+
+.loginmach{
+  font-weight: 900;
+}
+
+.smallbt2 {
+  border: 2px solid black;
+  margin: 10px;
+  border-radius: 10px;
+  width: 250px;
+  height: 50px;
+  padding: 10px;
+  margin-right: 10px;
+  background-color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 900;
+}
+
+.smallbt2:hover{
+  background-color:lightgray
+}
+
+.signupBtn{
+  border: 2px solid black;
+  margin: 10px;
+  border-radius: 10px;
+  width: 250px;
+  height: 50px;
+  padding: 10px;
+  background-color: white;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.signupBtn:hover{
+  background-color:lightgray
+}
+
+.signupEx{
+  font-weight: 900;
+}
+
+.mainBtn{
+  border: 2px solid black;
+  margin: 1%;
+  border-radius: 5px;
+  width: 100px;
+  height: 25px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.7em;
+}
+
+.mainBtn:hover{
+  background-color:lightgray
+}
+
+.infoForm{
+  width: 250px;
+  height: 20px;
+}
+
+.editpwTag{
+  font-weight: 700;
+}
+
+.editpwBtn{
+  border: 2px solid black;
+  margin: 1%;
+  border-radius: 5px;
+  width: 80px;
+  height: 25px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.7em;
+}
+
+.editpwBtn:hover{
+  background-color:lightgray
+}
+
+.mypageBtn{
+  border: 2px solid black;
+  margin: 0.5%;
+  border-radius: 5px;
+  width: 100px;
+  height: 25px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.7em;
+}
+
+.mypageBtn:hover{
+  background-color:lightgray
+}
+
+.editContent{
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 50px;
+  height: 25px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.7em;
+}
+
+.editContent:hover{
+  background-color:lightgray
+}
+
+.deleteContent{
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 50px;
+  height: 25px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.7em;
+}
+
+.deleteContent:hover{
+  background-color:lightgray
+}
+
+.create_updateBtn{
+  border: 2px solid black;
+  margin: 0.5%;
+  border-radius: 5px;
+  width: 100px;
+  height: 25px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.7em;
+}
+
+.create_updateBtn:hover{
+  background-color:lightgray
+}
+
+.byeBtn{
+  border: 2px solid black;
+  margin: 0.5%;
+  border-radius: 5px;
+  width: 100px;
+  height: 25px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.7em;
+}
+
+.byeBtn:hover{
+  background-color:lightgray
 }
