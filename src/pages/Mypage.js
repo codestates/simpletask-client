@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {Link,withRouter,useHistory} from "react-router-dom";
+import { withRouter,useHistory} from "react-router-dom";
 import axios from 'axios';
 //props는 userdata 
 function  Mypage ({userData,deleteHand}) {
@@ -10,8 +10,7 @@ function  Mypage ({userData,deleteHand}) {
   };
 
   const addfriend = () => {
-    console.log(userData.name)
-    axios.post("http://localhost:8080/addfriend", 
+    axios.post("https://52.79.241.137:8080/addfriend", 
     {
       name: userData.name,
       friendId: friendName
@@ -19,7 +18,6 @@ function  Mypage ({userData,deleteHand}) {
     .then(res => {
       history.push('/bye')
       history.push('/mypage')
-      console.log(res,"^^^^^^^^^^^^^^^^^^^")
     }
     )
   }

@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, Switch, Route, Redirect, withRouter, useHistory } from "react-router-dom";
+import {Link, withRouter } from "react-router-dom";
 import axios from 'axios';
 
 class Signup extends React.Component {
@@ -35,11 +35,9 @@ class Signup extends React.Component {
         err : ""
       })
     }
-    console.log("@@@@@@@@@@@@@아이디생성@@@@@@@@@@@");
-  return axios.post("http://localhost:8080/signup",
+  return axios.post("https://52.79.241.137:8080/signup",
   {email:this.state.email ,name:this.state.name, password:this.state.password, nickname:this.state.nickname})
   .then(()=>{
-    console.log("@@@@@@@@@@아이디생성됨@@@@@@@@");
     alert("아이디 생성 완료");
   })
   .then((res) =>{

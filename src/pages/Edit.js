@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import {Link, withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 class Edit extends React.Component{
     constructor(props){
         super(props)
@@ -16,9 +16,8 @@ class Edit extends React.Component{
         this.setState({ [key]: e.target.value });
       };
     ClickEdithandle() {
-        // axios.post(`https://localhost:4000/`,{데이터?},{옵션})
-     const {userData} = this.props
-     const {Password,EditPassword} = this.state
+       const {userData} = this.props
+       const {Password,EditPassword} = this.state
        if(!Password || !EditPassword){
            this.setState({
                err : "모두 작성"
@@ -30,11 +29,9 @@ class Edit extends React.Component{
                err:""
            })
        }
-        console.log(userData,"실행되냐");
-       return axios.post("http://localhost:8080/editpw",
+       return axios.post("https://52.79.241.137:8080/editpw",
        {email:userData.email, password:EditPassword})
         .then((res)=>{
-            console.log(res,"@@변경됨@@@@");
             this.props.history.push('/mypage')
         })
         .catch((err)=>{

@@ -1,33 +1,17 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import axios from "axios";
-import { Switch, Route, Redirect, withRouter, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import TextEntry from "./textEntry"
-import UpdateForm from "./UpdateForm";
 
-// 수정중
-
-// user_id:
 function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, HandleTextIdThrow}) {
     
     let history = useHistory()
-    
-
-    //지금 디드 마운팅 보다 map 이 먼저 읽어가지고 나오지가 않음
-
-    // console.log(isLogin);
-    // console.log(userData);
-    // console.log(texts);
-    
     let renderText = (obj) =>{
         let content = document.createElement('div');
-        // let id = document.createElement('div');
         let name = document.createElement('div')
         let title = document.createElement('span');
         let text = document.createElement('div');
         let date = document.createElement('div');
-        // let buttons = document.createElement('div');
         let editBtn = document.createElement('button');
         let deleteBtn = document.createElement('button');
         let content_title = document.createElement('div')
@@ -35,7 +19,6 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
         let editbt = document.createElement('span')
         
         content.classList.add('contents')
-        // id.classList.add('id')
         name.classList.add('name')
         title.classList.add('title');
         text.classList.add('text');
@@ -46,8 +29,6 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
         content_text.classList.add('content_text')
         editbt.classList.add('editbt')
     
-
-        // id.textContent = `글 번호 : ${obj.id}`
         name.textContent = `작성자 : ${obj.user_id}`
         title.textContent = `제목 : ${obj.title}`;
         text.textContent = `내용 : ${obj.text}`;
@@ -62,20 +43,16 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
         editBtn.addEventListener('click', updateTextHandler);
         deleteBtn.addEventListener('click', deleteTextHandler);
 
-        // buttons.append(editBtn, deleteBtn)
         editbt.append(editBtn, deleteBtn)
         content_title.append(title, editbt)
         content_text.append(name, text, date)
-        content.append(content_title, editbt, content_text)
-        // content.append(id, name, title, text, date, buttons);
-        //console.log(content);
+        content.append(content_title, content_text)
         return content;
     }
 
     let renderContent = () => {
         let contentList = document.createElement('div')
         contentList.classList.add('contents_inside');
-        
         let Ocontents = document.querySelector('.contents_outside');
 
         for(let i of texts){
@@ -90,14 +67,10 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
     }
 
     let filtering = () => {
-        console.log('filtering contents');
-        
         removeContent();
         let contentList = document.createElement('div')
         contentList.classList.add('contents_inside');
-        
         let Ocontents = document.querySelector('.contents_outside');
-
         let filtered = texts.filter((el) => {
             return el.user_id === userData.email;
         });
@@ -110,14 +83,12 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
     }
 
     let reset = () => {
-        console.log('reset contents');
         removeContent();
         renderContent();
     }
 
     let updateTextHandler = (event) =>{
         let targetName = event.target;
-        console.log(targetName.id);
         if(targetName.value === userData.email){
             console.log('ok');
             HandleTextIdThrow(targetName.id);
@@ -131,7 +102,6 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
 
     let deleteTextHandler = (event) =>{
         let targetName = event.target;
-        console.log(targetName.id);
         if(targetName.value === userData.email){
             console.log('ok')
             HandleTextDelete(targetName.id);

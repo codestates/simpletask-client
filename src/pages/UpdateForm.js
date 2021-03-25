@@ -1,7 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import axios from "axios";
-import { Switch, Route, Redirect, withRouter, useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class UpdateForm extends React.Component{
     constructor(props){
@@ -20,15 +18,12 @@ class UpdateForm extends React.Component{
     }
 
     updateText(){
-        console.log(this.state);
-        console.log(this.props.text_id);
         let textInfo = {title: this.state.title, text: this.state.text, id: this.props.text_id}
         this.props.HandleTextUpdate(textInfo);
         this.props.history.push("/");
     }
 
     render(){
-        console.log(this.props.userData.email)
         return(
             <div>
                 <div className="bigtitle">글 수정</div>

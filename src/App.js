@@ -24,7 +24,6 @@ class App extends React.Component{
     }
     this.loginHandler = this.loginHandler.bind(this);
     this.logoutHandler = this.logoutHandler.bind(this);
-    // this.textHandler = this.textHandler.bind(this)
     this.nomemberLoginHandler = this.nomemberLoginHandler.bind(this);
     this.deleteHand = this.deleteHand.bind(this);
     this.HandleTextDelete = this.HandleTextDelete.bind(this);
@@ -34,26 +33,19 @@ class App extends React.Component{
     this.getAccessToken = this.getAccessToken.bind(this);
     this.getGitHubUserInfo = this.getGitHubUserInfo.bind(this)
   }
-// 앱 실행되면 전체 컨텐츠 목록 받아오기
+
   componentDidMount(){
-    // this.getGitHubUserInfo()
     const url = new URL(window.location.href)
-    console.log("url :" + url)
     const authorizationCode = url.searchParams.get('code')
-    console.log("authorizationCode :" + authorizationCode)
     if (authorizationCode) {
       this.getAccessToken(authorizationCode)
-      console.log("testing")
     }
     
-    // ///////////////////////////////////////////
-    axios.get("http://localhost:8080/contents")
+    axios.get("https://52.79.241.137:8080/contents")
     .then((res)=>{ 
-      // console.log(res.data.data,"get@@@@@@@@@");
-      return axios.get("http://localhost:8080/contents")
+      return axios.get("https://52.79.241.137:8080/contents")
     })
     .then((res)=>{
-      console.log(res.data.data,"get@@@@@@@@@");
       this.setState({
         text : res.data.data
       })
@@ -64,9 +56,8 @@ class App extends React.Component{
     
   }
 
-  async getAccessToken(authorizationCode) { // authorization-code를 전달하여 token으로 교환 
-    let resp = await axios.post('http://localhost:8080/callback', { authorizationCode: authorizationCode })
-      console.log(resp)
+  async getAccessToken(authorizationCode) {
+    let resp = await axios.post('https://52.79.241.137:8080/callback', { authorizationCode: authorizationCode })
     this.setState({
       isLogin: true,
       accessToken: resp.data.accessToken
@@ -74,14 +65,13 @@ class App extends React.Component{
     this.getGitHubUserInfo()
   } 
 
-  async getGitHubUserInfo() {  // githunb에 token 전달하여 email, login 받아 state 업데이트
+  async getGitHubUserInfo() {
     const  accessToken  = this.state.accessToken
     let response = await axios.get('https://api.github.com/user', {
       headers: {
         authorization: `token ${accessToken}`,
       }
     })
-    console.log(response)
     const { email, login, name, created_at } = response.data
     this.setState({
       userData: {
@@ -92,7 +82,6 @@ class App extends React.Component{
         createdAt: created_at
       }
     })
-    console.log(this.state.userData)
     this.props.history.push('/');
   }
   // user정보 및 isLogin 변환
@@ -101,23 +90,20 @@ class App extends React.Component{
          isLogin :  true,
          userData : obj,
        })
-       console.log(this.state.isLogin, this.state.userData,"@@@@@@@@state");
     }
   //text state 변환시켜주기
   //  textHandler(obj){
   //    this.setState({
   //      text : obj
   //    })
-  //    console.log(this.state , "2번쨰 state");
   //  }
   logoutHandler(){
-   axios.post(('http://localhost:8080/signout'))
+   axios.post(('https://52.79.241.137:8080/signout'))
    .then(()=>{
     this.setState({
       isLogin: false,
       userData:null
     })
-    console.log(this.state.isLogin, this.state.userData,"@@@@@@@@state");
    })
   }
   // 비회원 로그인 
@@ -129,18 +115,12 @@ class App extends React.Component{
   //회원탈퇴
   deleteHand(){
     this.props.history.push('/bye')
-    console.log("@@@@@@@@삭제@@@@@@@");
-    console.log(this.state.userData);
-    console.log(this.state.userData.id);
-   axios.post("http://localhost:8080/deleteid",{email:this.state.userData.email})
+   axios.post("https://52.79.241.137:8080/deleteid",{email:this.state.userData.email})
    .then(()=>{
-     console.log("@@@@@@삭제됨@@@@@@@");
      this.setState({
       isLogin: false,
       userData : null
     })
-    console.log('%%%%%')
-     console.log(this.state)
    })
    .then(()=>{
     
@@ -150,10 +130,8 @@ class App extends React.Component{
 
   //글 작성 함수
   HandleTextCreate(obj){
-    console.log('글 작성 함수 실행');
-    axios.post("http://localhost:8080/create", obj)
+    axios.post("https://52.79.241.137:8080/create", obj)
     .then(() => {
-      console.log('글 작성 완료');
       this.componentDidMount();
     })
     .then((res) =>{
@@ -171,10 +149,8 @@ class App extends React.Component{
 
   //글 수정 함수
   HandleTextUpdate(obj){
-    console.log('글 수정 함수 실행');
-    axios.post("http://localhost:8080/edit", obj)
+    axios.post("https://52.79.241.137:8080/edit", obj)
     .then(() => {
-      console.log('글 수정 완료');
       this.componentDidMount();
     })
     .then((res) =>{
@@ -185,11 +161,8 @@ class App extends React.Component{
 
   //글 삭제 함수
   HandleTextDelete(int){
-    console.log("글 삭제 함수 실행");
-    console.log(this.state.text.id)
-    axios.post("http://localhost:8080/delete", {id: int})
+    axios.post("https://52.79.241.137:8080/delete", {id: int})
     .then(() => {
-      console.log('글 삭제 완료');
       this.componentDidMount();
     })
     .catch((err) => console.log(err))

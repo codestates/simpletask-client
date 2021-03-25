@@ -1,7 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import axios from "axios";
-import { Switch, Route, Redirect, withRouter, useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class WriteForm extends React.Component{
     constructor(props){
@@ -9,7 +7,6 @@ class WriteForm extends React.Component{
         this.state ={
             title: '',
             text: '',
-
         }
         this.handleInputValue = this.handleInputValue.bind(this);
         this.createWrite = this.createWrite.bind(this);
@@ -24,26 +21,12 @@ class WriteForm extends React.Component{
             alert("제목을 입력해주세요");
             return;
         }
-        console.log(this.state.title, this.state.text, this.props.userData.email);
         let textInfo = {title: this.state.title, text: this.state.text, user_id: this.props.userData.email}
         this.props.HandleTextCreate(textInfo);
         this.props.history.push("/");
-
-        /*axios.post("http://localhost:8080/create",
-            {title:this.state.title, text:this.state.text, user_id: this.props.userData.email})
-        .then(() => {
-            console.log("작성한 글 보내기");
-            console.log(this.state.title, this.state.text);
-        })
-        .then((res) =>{
-            this.props.history.push("/");
-        })
-        .catch((err) => console.log(err));*/
-
     }
 
     render(){
-        console.log(this.props.userData.email)
         return(
             <div>
                 <div className='bigtitle'>글 쓰기</div>
