@@ -5,8 +5,7 @@ import { Switch, Route, Redirect, withRouter, useHistory } from "react-router-do
 
 import TextEntry from "./textEntry"
 import UpdateForm from "./UpdateForm";
-
-// 수정중
+import Weather from "./Weather";
 
 // user_id:
 function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, HandleTextIdThrow}) {
@@ -66,7 +65,7 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
         editbt.append(editBtn, deleteBtn)
         content_title.append(title, editbt)
         content_text.append(name, text, date)
-        content.append(content_title, editbt, content_text)
+        content.append(content_title, content_text)
         // content.append(id, name, title, text, date, buttons);
         //console.log(content);
         return content;
@@ -135,8 +134,6 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
         if(targetName.value === userData.email){
             console.log('ok')
             HandleTextDelete(targetName.id);
-            history.push('/bye')
-            history.push('/')
         }else{
             console.log('no');
         }
@@ -157,7 +154,7 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
             <header>
                 <div className = "bigtitle">Simpletask</div>
                 <div className = "btcollect1">
-                    <span className = 'smallbt' onClick = {signinClick}>로그인</span>
+                    <span className = 'smallbt' onClick = {signinClick}> 로그인 </span>
                     <span className = 'smallbt' onClick = {signupClick}>회원가입</span>
                 </div>
             </header>
@@ -166,17 +163,20 @@ function MainPage({texts, isLogin, userData, logoutHandler, HandleTextDelete, Ha
         <div>
             <header>
                 <div className = "bigtitle">Simpletask</div>
+                <div className = "time-weather">
+                    <Weather></Weather>
+                </div>
                 <div className = 'btcollect1'>
                     <span className='smallbt' onClick={()=>{logoutHandler()}}>로그아웃</span>
                     {userData ? (
-                        <span className='smallbt' onClick={()=>{history.push("/mypage")}}>내 정보</span>
+                        <span className='smallbt' onClick={()=>{history.push("/mypage")}}> 내 정보 </span>
                     ) : ( '' )}
                 </div>
                     {userData ? (
                         <div className='btcollect2'>
-                            <button onClick={() => reset()}> 전체글 </button> 
-                            <button onClick={() => filtering()}> 내가작성한글만 </button>
-                            <button onClick={() => history.push("/writeform")}> 글쓰기  </button>
+                            <button className="mainBtn" onClick={() => reset()}> 전체글 </button> 
+                            <button className="mainBtn" onClick={() => filtering()}> 내가작성한글만 </button>
+                            <button className="mainBtn" onClick={() => history.push("/writeform")}> 글쓰기  </button>
                         </div>
                         ) : ( ''
                     )}

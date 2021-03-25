@@ -44,14 +44,14 @@ function  Mypage ({userData,deleteHand}) {
         {userData.friend ? <div>관심있는 사람 : {userData.friend}</div> : ''}
         <div>생성일 : {userData.createdAt}</div>
         <div className='btcollect3'>
-          <button onClick={mainClick}> 메인페이지</button>
+          <button className="mypageBtn" onClick={mainClick}> 메인페이지</button>
           {userData.isGit === false ?
           <span>
-              <button onClick={editpw}> 비밀번호 변경 </button>
-              <button onClick={deleteHand}>회원 탈퇴</button>
+              <button className="mypageBtn" onClick={editpw}> 비밀번호 변경 </button>
+              <button className="mypageBtn" onClick={deleteHand}>회원 탈퇴</button>
           <div className='addfriend'>
             <input onChange={(e) => handleChangeFrn(e)}></input>
-            <button onClick={addfriend}>관심 갖기</button>
+            <button className="mypageBtn" onClick={addfriend}>관심 갖기</button>
           </div>
           </span>
               : ''

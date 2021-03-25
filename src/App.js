@@ -10,6 +10,7 @@ import axios from "axios";
 import WriteForm from "./pages/WriteForm";
 import UpdateForm from "./pages/UpdateForm";
 import Bye from "./pages/Bye"
+import Weather from "./pages/Weather";
 
 // import axios from 'axios';
 class App extends React.Component{

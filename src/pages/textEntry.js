@@ -39,8 +39,8 @@ const TextEntry = ({userData, texts, HandleTextDelete, HandleTextIdThrow}) =>{
                 <span className="title">제목 : {texts.title}</span>
                 {/* <span className='contents_id'>글 번호 : {texts.id}</span> */}
                 <span className='editbt'>
-                    <button id={texts.id} value={texts.user_id} onClick={updateTextHandler}>수정</button>
-                    <button id={texts.id} value={texts.user_id} onClick={deleteTextHandler}>삭제</button>
+                    <button className="editContent" id={texts.id} value={texts.user_id} onClick={updateTextHandler}>수정</button>
+                    <button className="deleteContent" id={texts.id} value={texts.user_id} onClick={deleteTextHandler}>삭제</button>
                 </span>
             </div>
             <div className='content_text'>

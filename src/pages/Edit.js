@@ -47,16 +47,18 @@ class Edit extends React.Component{
                 <div className='bigtitle'>비밀번호 수정</div>
                 <div className='myinfo'>
                     <div>
-                        비밀번호 <input type="password" onChange = {this.handleInputValue("Password")}></input>
+                        <div className="editpwTag">현재 비밀번호</div>
+                        <input className="infoForm" type="password" onChange = {this.handleInputValue("Password")}></input>
                     </div>
                     <div>
-                        바꿀 비밀번호 <input type="password" onChange = {this.handleInputValue("EditPassword")}></input>
+                        <div className="editpwTag">바꿀 비밀번호</div>
+                        <input className="infoForm" type="password" onChange = {this.handleInputValue("EditPassword")}></input>
                     </div>
                     <span>
-                        <button onClick = {this.ClickEdithandle}>변경</button>
+                        <button className="editpwBtn" onClick = {this.ClickEdithandle}>변경</button>
                     </span>
                     <span>
-                        <button onClick = {()=>{this.props.history.push('/mypage')}}>취소</button>
+                        <button className="editpwBtn" onClick = {()=>{this.props.history.push('/mypage')}}>취소</button>
                     </span>
                         {this.state.err ? <div  className="alert-box">{this.state.err}</div> : ""}
                 </div>

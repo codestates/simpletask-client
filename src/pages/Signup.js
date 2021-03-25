@@ -58,25 +58,25 @@ class Signup extends React.Component {
           <div className='bigtitle'>회원가입</div>
           <div className='myinfo'>
             <div>
-              이메일
-              <input type="email" onChange= {this.handleInputValue("email")} ></input>
+              <div className="signupEx">이메일</div>
+              <input className="infoForm" type="email" onChange= {this.handleInputValue("email")} ></input>
             </div>
             <div>
-                이름
-            <input    onChange= {this.handleInputValue("name")}></input>
-              </div>
-            <div>
-              비밀번호
-              <input type="password" onChange= {this.handleInputValue("password")}></input>
+              <div className="signupEx">이름</div>
+              <input className="infoForm" onChange= {this.handleInputValue("name")}></input>
             </div>
             <div>
-              닉네임
-              <input  onChange= {this.handleInputValue("nickname")}></input>
+              <div className="signupEx">비밀번호</div>
+              <input className="infoForm" type="password" onChange= {this.handleInputValue("password")}></input>
+            </div>
+            <div>
+              <div className="signupEx">닉네임</div>
+              <input className="infoForm" onChange= {this.handleInputValue("nickname")}></input>
             </div>
             <div>
               <Link to="/signin">이미 아이디를 갖고 계신가요?</Link>  
             </div>
-            <button onClick={this.handleSignup} className="signupBtn">회원가입</button>
+            <button className="signupBtn" onClick={this.handleSignup} className="signupBtn">회원가입</button>
           <div>{this.state.err}</div>
           </div>
 
